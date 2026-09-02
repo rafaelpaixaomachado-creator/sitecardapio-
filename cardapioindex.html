@@ -1,16 +1,27 @@
-<html lang="en">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cardapio </title>
+    <title>Fazer Pedido</title>
 </head>
 <body>
-    <main>
-     <img src="cardapio_preto_e_branco.png" alt="cardapio_preto_e_branco">
-      
-      
 
-
+    <main> 
+        <!-- Cardápio exibido para o usuário -->
+        <img src="cardapio_preto_e_branco.png" alt="Cardápio em preto e branco"> 
+        
+        <!-- Formulário para envio do pedido -->
+        <form action="/enviar-pedido" method="POST">
+            <!-- O valor do 'for' deve ser igual ao 'id' do input --> 
+            <label for="campo-pedido">Digite o número do prato desejado:</label> 
+            <input type="text" id="campo-pedido" name="pedido" required placeholder="Ex: 12">
+            
+            <!-- Botão para enviar o formulário -->
+            <button type="submit">Confirmar Pedido</button>
+        </form>
     </main>
+
 </body>
 </html>
+
