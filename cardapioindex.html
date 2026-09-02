@@ -4,24 +4,170 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fazer Pedido</title>
+    <style>
+        /* Reset de estilos e variáveis globais */
+        :root {
+            --bg-principal: #0d0d13;
+            --bg-card: #181824;
+            --cor-neon: #ff5e62;
+            --cor-neon-efeito: #ff9966;
+            --texto-claro: #ffffff;
+            --texto-mutado: #a0a0b8;
+            --borda-foco: #00f2fe;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* Fundo com degradê sutil e centralização */
+        body {
+            background: radial-gradient(circle at top, #1e1e30 0%, var(--bg-principal) 100%);
+            color: var(--texto-claro);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Container principal estilo Glassmorphism */
+        main {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 40px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 
+                        0 0 50px rgba(255, 94, 98, 0.1);
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+
+        main:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Estilização avançada da imagem do cardápio */
+        main img {
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            filter: grayscale(0%) contrast(110%);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        main img:hover {
+            border-color: var(--cor-neon);
+            box-shadow: 0 0 20px rgba(255, 94, 98, 0.4);
+        }
+
+        /* Formulário estruturado em coluna */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            text-align: left;
+        }
+
+        /* Texto de instrução com alto contraste */
+        label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--texto-claro);
+            letter-spacing: 0.5px;
+            margin-left: 4px;
+        }
+
+        /* Campo de texto moderno e interativo */
+        input[type="text"] {
+            width: 100%;
+            padding: 16px;
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--texto-claro);
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            outline: none;
+            text-align: center;
+        }
+
+        input[type="text"]::placeholder {
+            color: var(--texto-mutado);
+            font-weight: normal;
+        }
+
+        /* Efeito de foco neon no input */
+        input[type="text"]:focus {
+            border-color: var(--borda-foco);
+            background-color: rgba(0, 242, 254, 0.02);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+        }
+
+        /* Botão principal com degradê vivo e animação */
+        button[type="submit"] {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--cor-neon) 0%, var(--cor-neon-efeito) 100%);
+            border: none;
+            border-radius: 12px;
+            color: var(--texto-claro);
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 6px 20px rgba(255, 94, 98, 0.4);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Efeitos de passar o mouse e clique no botão */
+        button[type="submit"]:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 25px rgba(255, 94, 98, 0.6);
+        }
+
+        button[type="submit"]:active {
+            transform: scale(0.98);
+        }
+
+        /* Responsividade para telas muito pequenas */
+        @media (max-width: 400px) {
+            main {
+                padding: 24px;
+            }
+            label {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </head>
 <body>
+<main>
+    <!-- Cardápio exibido para o usuário -->
+    <img src="cardapio_preto_e_branco.png" alt="Cardápio em preto e branco">
 
-    <main> 
-        <!-- Cardápio exibido para o usuário -->
-        <img src="cardapio_preto_e_branco.png" alt="Cardápio em preto e branco"> 
+    <!-- Formulário para envio do pedido -->
+    <form action="/enviar-pedido" method="POST">
+        <!-- O valor do 'for' deve ser igual ao 'id' do input -->
+        <label for="campo-pedido">Digite o número do prato desejado:</label>
+        <input type="text" id="campo-pedido" name="pedido" required placeholder="Ex: 12">
         
-        <!-- Formulário para envio do pedido -->
-        <form action="/enviar-pedido" method="POST">
-            <!-- O valor do 'for' deve ser igual ao 'id' do input --> 
-            <label for="campo-pedido">Digite o número do prato desejado:</label> 
-            <input type="text" id="campo-pedido" name="pedido" required placeholder="Ex: 12">
-            
-            <!-- Botão para enviar o formulário -->
-            <button type="submit">Confirmar Pedido</button>
-        </form>
-    </main>
-
+        <!-- Botão para enviar o formulário -->
+        <button type="submit">Confirmar Pedido</button>
+    </form>
+</main>
 </body>
 </html>
+
 
